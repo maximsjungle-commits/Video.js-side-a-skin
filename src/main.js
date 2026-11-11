@@ -530,27 +530,12 @@ document.documentElement.classList.replace('no-js', 'js');
     el.style.setProperty('--d', `${[...sibs].indexOf(el) * 90}ms`);
     io.observe(el);
   });
-  // light / dark page theme
-  const themeBtn = document.querySelector('.theme');
-  if (themeBtn) {
-    const apply = (light) => {
-      document.documentElement.toggleAttribute('data-theme', light);
-      if (light) document.documentElement.dataset.theme = 'light';
-      themeBtn.setAttribute('aria-pressed', String(light));
-      themeBtn.querySelector('[data-theme-label]').textContent = light ? 'DARK' : 'LIGHT';
-      themeBtn.setAttribute('aria-label', light ? 'Dark theme' : 'Light theme');
-      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', light ? '#f1eee6' : '#18120e');
-    };
-    apply(document.documentElement.dataset.theme === 'light');
-    themeBtn.addEventListener('click', () => {
-      const light = document.documentElement.dataset.theme !== 'light';
-      apply(light);
-      sfx.select();
-      try {
-        localStorage.setItem('side-a-theme', light ? 'light' : 'dark');
-      } catch {}
-    });
-  }
+  // the SIDE A wordmark resets the page
+  document.querySelector('[data-home]')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo(0, 0);
+    window.location.reload();
+  });
   // the keyboard legend lights up as you type
   const legend = (e, on) => {
     const k = /^\d$/.test(e.key) ? 'digit' : e.key.length === 1 ? e.key.toLowerCase() : e.key;
