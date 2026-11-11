@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,11 +32,11 @@
 <main>
   <section class="hero">
     <p class="eyebrow">CONTRA x VIDEO.JS SKIN CHALLENGE / 2026</p>
-    <h1>PRESS PLAY<br>ON <em>SIDE A.</em></h1>
+    <h1 aria-label="Press play on Side A.">PRESS PLAY<br>ON SIDE A.</h1>
     <p class="lede">A warm tape-deck skin for the Video.js v10 player. Clicky transport keys, a volume knob you can turn, and every control reachable by thumb, mouse or keyboard.</p>
   </section>
 
-  <section class="stage" id="player" aria-label="SIDE A player">
+  <section class="stage" id="player" aria-label="SIDE A player" data-reveal>
     <video-player>
       <media-container class="deck" aria-label="SIDE A video player">
         <div class="deck-body">
@@ -98,6 +98,7 @@
           </media-error-dialog>
         </div>
 
+        <span class="led" aria-hidden="true"></span><span class="cone cone-l" aria-hidden="true"></span><span class="cone cone-r" aria-hidden="true"></span>
         <div class="keys" role="group" aria-label="Transport keys">
           <button type="button" class="key" style="--x:118" data-action="play" data-key="play" aria-label="Play" aria-pressed="false"><img src="assets/key-play.webp" alt="" draggable="false"></button>
           <button type="button" class="key" style="--x:255" data-action="pause" data-key="pause" aria-label="Pause" aria-pressed="false"><img src="assets/key-pause.webp" alt="" draggable="false"></button>
@@ -180,43 +181,43 @@
     </video-player>
   </section>
 
-  <section class="hotkeys" id="keys" aria-labelledby="keys-title">
+  <section class="hotkeys" id="keys" aria-labelledby="keys-title" data-reveal>
     <h2 id="keys-title">KEYBOARD</h2>
     <ul>
-      <li><span class="caps"><kbd>SPACE</kbd><kbd>K</kbd></span><span>Play / pause</span></li>
-      <li><span class="caps"><kbd>&larr;</kbd><kbd>&rarr;</kbd></span><span>Back / forward 10s</span></li>
-      <li><span class="caps"><kbd>&uarr;</kbd><kbd>&darr;</kbd></span><span>Volume, when the deck is focused</span></li>
-      <li><span class="caps"><kbd>M</kbd></span><span>Mute</span></li>
-      <li><span class="caps"><kbd>F</kbd></span><span>Fullscreen</span></li>
-      <li><span class="caps"><kbd>S</kbd></span><span>Settings</span></li>
-      <li><span class="caps"><kbd>R</kbd></span><span>Retro screen effect on / off</span></li>
-      <li><span class="caps"><kbd>0</kbd>&ndash;<kbd>9</kbd></span><span>Jump to 0&ndash;90%</span></li>
-      <li><span class="caps"><kbd>ESC</kbd></span><span>Close menu / exit fullscreen</span></li>
+      <li><span class="caps"><kbd data-k=" ">SPACE</kbd><kbd data-k="k">K</kbd></span><span>Play / pause</span></li>
+      <li><span class="caps"><kbd data-k="ArrowLeft">&larr;</kbd><kbd data-k="ArrowRight">&rarr;</kbd></span><span>Back / forward 10s</span></li>
+      <li><span class="caps"><kbd data-k="ArrowUp">&uarr;</kbd><kbd data-k="ArrowDown">&darr;</kbd></span><span>Volume, when the deck is focused</span></li>
+      <li><span class="caps"><kbd data-k="m">M</kbd></span><span>Mute</span></li>
+      <li><span class="caps"><kbd data-k="f">F</kbd></span><span>Fullscreen</span></li>
+      <li><span class="caps"><kbd data-k="s">S</kbd></span><span>Settings</span></li>
+      <li><span class="caps"><kbd data-k="r">R</kbd></span><span>Retro screen effect on / off</span></li>
+      <li><span class="caps"><kbd data-k="digit">0</kbd>&ndash;<kbd data-k="digit">9</kbd></span><span>Jump to 0&ndash;90%</span></li>
+      <li><span class="caps"><kbd data-k="Escape">ESC</kbd></span><span>Close menu / exit fullscreen</span></li>
     </ul>
     <p class="hint">Or use the deck: click a key, drag or scroll the volume knob, tap the screen to play.</p>
   </section>
 
+  <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>SIDE A &nbsp;/&nbsp; PRESS PLAY &nbsp;/&nbsp; A SKIN FOR VIDEO.JS V10 &nbsp;/&nbsp; CLICK. CLACK. &nbsp;/&nbsp; REWIND. REPLAY. &nbsp;/&nbsp; SIDE A &nbsp;/&nbsp; PRESS PLAY &nbsp;/&nbsp; A SKIN FOR VIDEO.JS V10 &nbsp;/&nbsp; CLICK. CLACK. &nbsp;/&nbsp; REWIND. REPLAY. &nbsp;/&nbsp; SIDE A &nbsp;/&nbsp; PRESS PLAY &nbsp;/&nbsp; A SKIN FOR VIDEO.JS V10 &nbsp;/&nbsp; CLICK. CLACK. &nbsp;/&nbsp; REWIND. REPLAY. &nbsp;/&nbsp; </span><span>SIDE A &nbsp;/&nbsp; PRESS PLAY &nbsp;/&nbsp; A SKIN FOR VIDEO.JS V10 &nbsp;/&nbsp; CLICK. CLACK. &nbsp;/&nbsp; REWIND. REPLAY. &nbsp;/&nbsp; SIDE A &nbsp;/&nbsp; PRESS PLAY &nbsp;/&nbsp; A SKIN FOR VIDEO.JS V10 &nbsp;/&nbsp; CLICK. CLACK. &nbsp;/&nbsp; REWIND. REPLAY. &nbsp;/&nbsp; SIDE A &nbsp;/&nbsp; PRESS PLAY &nbsp;/&nbsp; A SKIN FOR VIDEO.JS V10 &nbsp;/&nbsp; CLICK. CLACK. &nbsp;/&nbsp; REWIND. REPLAY. &nbsp;/&nbsp; </span></div></div>
   <div class="light">
   <section class="access" id="access" aria-labelledby="access-title">
-    <div class="stripes" aria-hidden="true"><i></i><i></i></div>
-    <p class="label">01 / ACCESS</p>
-    <h2 id="access-title">BUILT FOR EVERY VIEWER</h2>
+    <p class="label" data-reveal>01 / ACCESS</p>
+    <h2 id="access-title" data-reveal>BUILT FOR EVERY VIEWER</h2>
     <div class="cards">
-      <article><b>TAB</b><h3>KEYBOARD FIRST</h3><p>Every control is reachable with Tab and works with Space, Enter and the arrow keys. Esc closes the menu. Focus is always outlined.</p></article>
-      <article><b>AA</b><h3>READABLE ON ANY FOOTAGE</h3><p>Times and controls sit on a solid dark bar, so type and icons keep their contrast over bright or dark video.</p></article>
-      <article><b>48</b><h3>ROOM FOR A THUMB</h3><p>On a phone the deck gains a row of 48 pixel touch keys and a full-width seek bar. Fullscreen uses the same size.</p></article>
-      <article><b>EASY</b><h3>CALM ON REQUEST</h3><p>Key travel, knob easing and screen flicker switch off when reduced motion is turned on.</p></article>
+      <article data-reveal><b>TAB</b><h3>KEYBOARD FIRST</h3><p>Every control is reachable with Tab and works with Space, Enter and the arrow keys. Esc closes the menu. Focus is always outlined.</p></article>
+      <article data-reveal><b>AA</b><h3>READABLE ON ANY FOOTAGE</h3><p>Times and controls sit on a solid dark bar, so type and icons keep their contrast over bright or dark video.</p></article>
+      <article data-reveal><b>48</b><h3>ROOM FOR A THUMB</h3><p>On a phone the deck gains a row of 48 pixel touch keys and a full-width seek bar. Fullscreen uses the same size.</p></article>
+      <article data-reveal><b>EASY</b><h3>CALM ON REQUEST</h3><p>Key travel, knob easing and screen flicker switch off when reduced motion is turned on.</p></article>
     </div>
   </section>
 
   <section class="notes" id="notes" aria-labelledby="notes-title">
-    <div>
+    <div data-reveal>
       <p class="label">02 / NOTES</p>
       <h2 id="notes-title">WHY A TAPE DECK</h2>
       <p>SIDE A started with one question: what if a web player felt like the machine you grew up rewinding? The palette comes from aged brass, olive enamel and green phosphor, with Video.js orange for everything that needs your eye. The controls borrow the logic of transport keys: one job per button, a clear pressed state, labels you can read from across the room.</p>
       <p class="muted">Under the casing it is a plain Video.js v10 skin built from the standard components. Go fullscreen and the deck steps aside for a slim brass-edged tray.</p>
     </div>
-    <div class="specimens">
+    <div class="specimens" data-reveal>
       <ul class="swatches" aria-label="Palette">
         <li style="--c:#ff6200"><i></i>ORANGE</li>
         <li style="--c:#f1eee6"><i></i>PAPER</li>

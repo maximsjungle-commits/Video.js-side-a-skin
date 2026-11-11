@@ -488,3 +488,54 @@ class SideADeck extends UIElement {
 }
 
 customElements.define('side-a-deck', SideADeck);
+
+
+/* ---------- page motion: headline type-on, scroll reveals, live key legend ---------- */
+document.documentElement.classList.replace('no-js', 'js');
+{
+  const h1 = document.querySelector('.hero h1');
+  if (h1) {
+    let i = 0;
+    for (const node of [...h1.childNodes]) {
+      if (node.nodeType !== 3) continue;
+      const frag = document.createDocumentFragment();
+      for (const word of node.textContent.split(' ')) {
+        const w = document.createElement('span');
+        w.className = 'word';
+        w.setAttribute('aria-hidden', 'true');
+        for (const ch of word) {
+          const s = document.createElement('span');
+          s.className = 'ch';
+          s.style.setProperty('--i', i++);
+          s.textContent = ch;
+          w.append(s);
+        }
+        frag.append(w, ' ');
+      }
+      node.replaceWith(frag);
+    }
+  }
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    },
+    { rootMargin: '0px 0px -8% 0px' },
+  );
+  document.querySelectorAll('[data-reveal]').forEach((el) => {
+    const sibs = el.parentElement.querySelectorAll(':scope > [data-reveal]');
+    el.style.setProperty('--d', `${[...sibs].indexOf(el) * 90}ms`);
+    io.observe(el);
+  });
+  // the keyboard legend lights up as you type
+  const legend = (e, on) => {
+    const k = /^\d$/.test(e.key) ? 'digit' : e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    document.querySelectorAll(`.hotkeys kbd[data-k="${CSS.escape(k)}"]`).forEach((el) => el.classList.toggle('on', on));
+  };
+  document.addEventListener('keydown', (e) => legend(e, true));
+  document.addEventListener('keyup', (e) => legend(e, false));
+  window.addEventListener('blur', () => document.querySelectorAll('.hotkeys kbd.on').forEach((el) => el.classList.remove('on')));
+}
