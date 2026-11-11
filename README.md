@@ -30,7 +30,7 @@ The `site` folder is the whole deployable site.
 
 ## Changing the video
 
-Replace `site/assets/tape.mp4` and `site/assets/poster.jpg`, or point the `<video>` in `site/index.html` at another source. The bundled clip is an original 40-second SIDE A ad with its own synth track; it has bright and dark scenes for checking contrast.
+Replace `site/assets/tape.mp4` and `site/assets/poster.jpg`, or point the `<video>` in `site/index.html` at another source. The bundled clip is an original 40-second film about how SIDE A was made and how it works, with its own synth track. It has bright and dark scenes for checking contrast.
 
 ## License
 
