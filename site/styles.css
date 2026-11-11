@@ -139,9 +139,6 @@ media-dialog-close{justify-self:center;cursor:pointer;border:1px solid var(--sag
 .tbtn[hidden]{display:none !important}
 media-play-button[data-paused] .i-pause,media-play-button:not([data-paused]) .i-play,
 media-mute-button[data-muted] .i-vol,media-mute-button:not([data-muted]) .i-mute{display:none}
-.deck:fullscreen[data-state="playing"]:not([data-menu]) .bar:not([data-visible]):not(:has(:focus-visible)){opacity:0;translate:0 8px;pointer-events:none}
-.deck:fullscreen[data-state="playing"]:not([data-menu]):has(.bar:not([data-visible]):not(:has(:focus-visible))){cursor:none}
-.deck:fullscreen[data-state="playing"]:not([data-menu]):has(.bar:not([data-visible]):not(:has(:focus-visible))) .osd-top{opacity:0}
 .deck:fullscreen .osd-top{transition:opacity .25s}
 .deck:fullscreen .menu{inset:50% auto auto 50%;translate:-50% -50%;width:min(560px,92vw);font-size:24px;gap:14px;padding:24px 28px;border:1.5px solid var(--brass);border-radius:16px}
 .deck:fullscreen .menu button{min-height:44px}
@@ -365,3 +362,17 @@ main{overflow-x:clip}
 .deck[data-state="idle"]:not([data-crt-off]) .static{display:block}
 .deck:fullscreen .static{display:none}
 .deck[data-crt-off] .osd-prompt{background:rgb(0 0 0/.25)}
+
+/* ================= v12: quiet screen while playing, focus ring only for Tab users ================= */
+/* The time bar and the labels fade out during playback and come back on any press, key or pointer move over the screen. */
+.bar,.osd-top{transition:opacity .35s}
+html:not([data-kbd]) .deck[data-state="playing"]:not([data-active]):not([data-menu]) .bar:not(:hover),
+html[data-kbd] .deck[data-state="playing"]:not([data-active]):not([data-menu]) .bar:not(:hover):not(:focus-within){opacity:0;pointer-events:none}
+.deck[data-state="playing"]:not([data-active]):not([data-menu]) .osd-top{opacity:0}
+.deck:fullscreen[data-state="playing"]:not([data-active]):not([data-menu]):not(:has(.bar:hover)){cursor:none}
+
+/* The orange outline is for keyboard navigation. It shows once Tab is used and goes away again on the next click or tap. */
+html.js:not([data-kbd]) :focus-visible{outline:none !important}
+html.js:not([data-kbd]) .nav a:not(.gh):focus-visible:not(:hover){color:inherit}
+html.js:not([data-kbd]) .nav a.gh:focus-visible:not(:hover){background:var(--orange);color:var(--surface)}
+a,button,.key,.tbtn,.knob,.readout,.slider{-webkit-tap-highlight-color:transparent}

@@ -168,6 +168,11 @@ const sfx = {
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
+// Focus rings are for keyboard navigation: on after Tab, off again on the next click or tap.
+const kbdNav = (on) => document.documentElement.toggleAttribute('data-kbd', on);
+document.addEventListener('keydown', (e) => e.key === 'Tab' && kbdNav(true), true);
+document.addEventListener('pointerdown', () => kbdNav(false), true);
+
 class SideADeck extends UIElement {
   #playback = new PlayerController(this, playerContext, selectPlayback);
   #volume = new PlayerController(this, playerContext, selectVolume);
@@ -177,6 +182,7 @@ class SideADeck extends UIElement {
   #last = {};
   #menuTrigger = null;
   #staticTimer = 0;
+  #activeTimer = 0;
   #dragging = false;
 
   connectedCallback() {
@@ -192,6 +198,8 @@ class SideADeck extends UIElement {
     const { signal } = this.#abort;
 
     root.addEventListener('click', this.#onClick, { signal });
+    root.addEventListener('pointerdown', this.#poke, { signal, capture: true });
+    root.querySelector('.screen').addEventListener('pointermove', this.#poke, { signal });
     root.addEventListener('dblclick', this.#onDblClick, { signal });
     this.menu.addEventListener('keydown', this.#onMenuKey, { signal });
     document.addEventListener('keydown', this.#onDocKey, { signal });
@@ -212,6 +220,7 @@ class SideADeck extends UIElement {
     this.#abort?.abort();
     this.#abort = null;
     clearInterval(this.#staticTimer);
+    clearTimeout(this.#activeTimer);
   }
 
   update(changed) {
@@ -234,6 +243,7 @@ class SideADeck extends UIElement {
         }
         last.state = state;
         root.dataset.state = state;
+        this.#poke();
         this.#syncStatic();
         root.querySelector('[data-key="play"]').setAttribute('aria-pressed', String(state === 'playing'));
         root.querySelector('[data-key="pause"]').setAttribute('aria-pressed', String(state === 'paused'));
@@ -248,6 +258,7 @@ class SideADeck extends UIElement {
         else if (last.muted !== undefined && vol.muted !== last.muted) sfx.pop();
         last.pct = pct;
         last.muted = vol.muted;
+        this.#poke();
         this.knob.style.setProperty('--turn', `${-135 + 270 * vol.volume}deg`);
         this.knob.setAttribute('aria-valuenow', String(pct));
         this.knob.setAttribute('aria-valuetext', vol.muted ? `${pct}%, muted` : `${pct}%`);
@@ -259,12 +270,14 @@ class SideADeck extends UIElement {
     if (fs && fs.isFullscreen !== last.fs) {
       if (last.fs !== undefined) sfx.key(1.25);
       last.fs = fs.isFullscreen;
+      this.#poke();
       root.toggleAttribute('data-fs', fs.isFullscreen);
     }
 
     const r = rate?.playbackRate ?? 1;
     if (r !== last.rate) {
       last.rate = r;
+      this.#poke();
       for (const b of this.menu.querySelectorAll('[data-rate]')) {
         const on = Number(b.dataset.rate) === r;
         b.setAttribute('aria-checked', String(on));
@@ -276,6 +289,13 @@ class SideADeck extends UIElement {
     const label = s === 'playing' ? 'PLAY ▶' : s === 'paused' ? 'PAUSE ❚❚' : s === 'ended' ? 'END' : 'STOP';
     root.querySelector('[data-status]').textContent = r !== 1 ? `${label}  ${r}x` : label;
   }
+
+  /* ---------- wake the on-screen time bar and labels for a moment ---------- */
+  #poke = () => {
+    this.root.toggleAttribute('data-active', true);
+    clearTimeout(this.#activeTimer);
+    this.#activeTimer = setTimeout(() => this.root.removeAttribute('data-active'), 2600);
+  };
 
   /* ---------- actions ---------- */
   #play() {
@@ -408,6 +428,7 @@ class SideADeck extends UIElement {
     const radios = [...this.menu.querySelectorAll('[data-rate]')];
     const i = radios.indexOf(document.activeElement);
     if (i >= 0 && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+      kbdNav(true);
       e.preventDefault();
       e.stopPropagation();
       const next = radios[(i + (e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 1) + radios.length) % radios.length];
@@ -439,6 +460,7 @@ class SideADeck extends UIElement {
   #onDocKey = (e) => {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.target.closest?.('input,textarea,select,[contenteditable]')) return;
+    if (!['Shift', 'Control', 'Alt', 'Meta', 'CapsLock'].includes(e.key)) this.#poke();
     if (!this.menu.hidden) {
       // Keep playback shortcuts out of the way while the menu is open.
       if (e.key === 'Escape') this.#closeMenu();
@@ -447,6 +469,7 @@ class SideADeck extends UIElement {
     }
     const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
     if (k === 's' && !e.repeat) {
+      kbdNav(true);
       const fsBtn = this.root.querySelector('.bar [data-action="menu"]');
       sfx.key(0.85);
       this.#flash('settings');
