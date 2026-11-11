@@ -357,6 +357,6 @@ main{overflow-x:clip}
 /* v9: more air between the intro text and the deck */
 .hero{padding-bottom:clamp(32px,4vw,48px)}
 /* v10: clear gap under the deck, wordmark link */
-.hotkeys{margin-top:clamp(28px,4vw,52px)}
+.hotkeys{margin-top:clamp(48px,7vw,104px)}
 .nav a.logo{font:18px var(--ps);letter-spacing:0;text-decoration:none}
 .nav a.logo:hover{color:var(--orange);text-decoration:none}
