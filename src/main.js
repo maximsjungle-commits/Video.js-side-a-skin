@@ -176,6 +176,7 @@ class SideADeck extends UIElement {
   #abort = null;
   #last = {};
   #menuTrigger = null;
+  #staticTimer = 0;
   #dragging = false;
 
   connectedCallback() {
@@ -185,6 +186,7 @@ class SideADeck extends UIElement {
     this.video = root.querySelector('video');
     this.menu = root.querySelector('.menu');
     this.knob = root.querySelector('.knob');
+    this.staticCanvas = root.querySelector('.static');
     this.#abort?.abort();
     this.#abort = new AbortController();
     const { signal } = this.#abort;
@@ -209,6 +211,7 @@ class SideADeck extends UIElement {
     super.disconnectedCallback();
     this.#abort?.abort();
     this.#abort = null;
+    clearInterval(this.#staticTimer);
   }
 
   update(changed) {
@@ -231,6 +234,7 @@ class SideADeck extends UIElement {
         }
         last.state = state;
         root.dataset.state = state;
+        this.#syncStatic();
         root.querySelector('[data-key="play"]').setAttribute('aria-pressed', String(state === 'playing'));
         root.querySelector('[data-key="pause"]').setAttribute('aria-pressed', String(state === 'paused'));
         root.querySelector('[data-prompt]').textContent = state === 'ended' ? 'END OF TAPE' : 'PRESS PLAY';
@@ -336,9 +340,34 @@ class SideADeck extends UIElement {
     (fs.isFullscreen ? fs.exitFullscreen() : fs.requestFullscreen())?.catch?.(() => {});
   };
 
+  /* ---------- TV static before the tape starts (part of the retro effect) ---------- */
+  #drawStatic() {
+    const c = this.staticCanvas;
+    const g = c.getContext('2d');
+    const d = g.createImageData(c.width, c.height);
+    for (let i = 0; i < d.data.length; i += 4) {
+      const v = (Math.random() * 255) | 0;
+      d.data[i] = d.data[i + 1] = d.data[i + 2] = v;
+      d.data[i + 3] = 255;
+    }
+    g.putImageData(d, 0, 0);
+  }
+  #syncStatic() {
+    const on = this.root.dataset.state === 'idle' && !this.root.hasAttribute('data-crt-off');
+    clearInterval(this.#staticTimer);
+    this.#staticTimer = 0;
+    if (!on || !this.staticCanvas) return;
+    this.#drawStatic();
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    this.#staticTimer = setInterval(() => {
+      if (!document.hidden) this.#drawStatic();
+    }, 70);
+  }
+
   /* ---------- CRT effect ---------- */
   #setCrt(on, silent = false) {
     this.root.toggleAttribute('data-crt-off', !on);
+    this.#syncStatic();
     const b = this.menu.querySelector('[data-toggle="crt"]');
     b.setAttribute('aria-pressed', String(on));
     b.textContent = on ? 'ON' : 'OFF';
