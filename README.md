@@ -30,7 +30,7 @@ The `site` folder is the whole deployable site.
 
 ## Changing the video
 
-Replace `site/assets/tape.mp4` and `site/assets/poster.jpg`, or point the `<video>` in `site/index.html` at another source. The bundled clip is a 30-second SIDE A ad cut from licensed Envato stock footage with an original soundtrack. The footage is licensed for this project only and is not covered by the Apache licence.
+Replace `site/assets/side-a-ad.mp4` and `site/assets/side-a-ad-poster.jpg`, or point the `<video>` in `site/index.html` at another source. The bundled clip is a 30-second SIDE A ad cut from licensed Envato stock footage with an original soundtrack. The footage is licensed for this project only and is not covered by the Apache licence.
 
 ## License
 
