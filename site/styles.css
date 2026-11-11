@@ -380,3 +380,5 @@ html[data-theme="light"] .caps kbd.on{background:var(--orange);color:var(--surfa
 html[data-theme="light"] .stage::before{background:radial-gradient(closest-side,rgb(255 98 0/.3),transparent)}
 html[data-theme="light"] .casing{filter:drop-shadow(0 18px 24px rgb(32 35 31/.28))}
 @media (max-width:640px){.theme{font-size:20px;padding:1px 10px}}
+/* v9: more air between the intro text and the deck */
+.hero{padding-bottom:clamp(40px,6vw,72px)}
