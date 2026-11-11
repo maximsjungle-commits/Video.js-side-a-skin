@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIDE A — a tape-deck skin for Video.js v10</title>
+<meta name="description" content="SIDE A is a retro tape-deck skin for the Video.js v10 player, with clicky transport keys, a rotary volume knob and full keyboard control.">
+<link rel="preload" href="assets/fonts/vt323-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#player">Skip to the player</a>
+
+<header class="nav">
+  <div class="brand">
+    <span class="logo">SIDE A</span>
+    <span class="tag">VIDEO.JS V10 SKIN</span>
+  </div>
+  <nav aria-label="Page">
+    <a href="#player">PLAYER</a>
+    <a href="#keys">KEYS</a>
+    <a href="#access">ACCESS</a>
+    <a href="#notes">NOTES</a>
+    <!-- TODO: replace with your repository URL -->
+    <a class="gh" href="https://github.com/" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M3 1h4v4H6v6h1v4H3v-4h1V5H3zM10 3h4v4h-1v3H7V9h5V7h-2z"/></svg>GITHUB</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="eyebrow">CONTRA x VIDEO.JS SKIN CHALLENGE / 2026</p>
+    <h1>PRESS PLAY<br>ON <em>SIDE A.</em></h1>
+    <p class="lede">A warm tape-deck skin for the Video.js v10 player. Clicky transport keys, a volume knob you can turn, and every control reachable by thumb, mouse or keyboard.</p>
+  </section>
+
+  <section class="stage" id="player" aria-label="SIDE A player">
+    <video-player>
+      <media-container class="deck" aria-label="SIDE A video player">
+        <div class="deck-body">
+        <img class="casing" src="assets/casing.webp" alt="" width="1280" height="853" draggable="false">
+
+        <div class="screen">
+          <video src="assets/tape.mp4" poster="assets/poster.jpg" preload="metadata" playsinline></video>
+          <div class="fx" aria-hidden="true"></div>
+
+          <div class="osd-top" aria-hidden="true">
+            <span class="osd-title">SIDE A / TAPE 01</span>
+            <span class="osd-status" data-status>STOP</span>
+          </div>
+          <div class="osd-prompt" aria-hidden="true"><span data-prompt>PRESS PLAY</span></div>
+
+          <media-buffering-indicator class="buffering"><span>TRACKING</span></media-buffering-indicator>
+
+          <media-controls class="controls">
+            <media-controls-content class="bar">
+              <media-play-button class="tbtn fs-only">
+                <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg>
+                <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" fill="currentColor"/></svg>
+              </media-play-button>
+              <media-mute-button class="tbtn fs-only">
+                <svg class="i-vol" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <svg class="i-mute" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </media-mute-button>
+              <media-volume-slider class="slider vol fs-only">
+                <media-slider-track class="track"><media-slider-fill class="fill"></media-slider-fill></media-slider-track>
+                <media-slider-thumb class="thumb"></media-slider-thumb>
+              </media-volume-slider>
+              <media-time class="time" type="current"></media-time>
+              <media-time-slider class="slider seek">
+                <media-slider-track class="track">
+                  <media-slider-buffer class="buffer"></media-slider-buffer>
+                  <media-slider-fill class="fill"></media-slider-fill>
+                </media-slider-track>
+                <media-slider-thumb class="thumb"></media-slider-thumb>
+              </media-time-slider>
+              <media-time class="time" type="remaining"></media-time>
+              <button type="button" class="tbtn fs-only" data-action="menu" aria-label="Settings" aria-haspopup="dialog">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M10.3 2.5h3.4l.5 2.6 1.6.7 2.2-1.5 2.4 2.4-1.5 2.2.7 1.6 2.6.5v3.4l-2.6.5-.7 1.6 1.5 2.2-2.4 2.4-2.2-1.5-1.6.7-.5 2.6h-3.4l-.5-2.6-1.6-.7-2.2 1.5-2.4-2.4 1.5-2.2-.7-1.6-2.6-.5v-3.4l2.6-.5.7-1.6-1.5-2.2 2.4-2.4 2.2 1.5 1.6-.7zM12 8.6a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8z"/></svg>
+              </button>
+              <media-pip-button class="tbtn fs-only">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="12" y="11.5" width="6.5" height="5" fill="currentColor"/></svg>
+              </media-pip-button>
+              <media-fullscreen-button class="tbtn fs-only">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3.5v5.5H3.5M15 3.5v5.5h5.500M9 20.500V15H3.5M15 20.500V15h5.500" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              </media-fullscreen-button>
+            </media-controls-content>
+          </media-controls>
+
+          <media-error-dialog>
+            <media-dialog-popup class="error">
+              <media-dialog-title></media-dialog-title>
+              <media-dialog-description></media-dialog-description>
+              <media-dialog-close>EJECT</media-dialog-close>
+            </media-dialog-popup>
+          </media-error-dialog>
+        </div>
+
+        <div class="keys" role="group" aria-label="Transport keys">
+          <button type="button" class="key" style="--x:118" data-action="play" data-key="play" aria-label="Play" aria-pressed="false"><img src="assets/key-play.webp" alt="" draggable="false"></button>
+          <button type="button" class="key" style="--x:255" data-action="pause" data-key="pause" aria-label="Pause" aria-pressed="false"><img src="assets/key-pause.webp" alt="" draggable="false"></button>
+          <media-seek-button class="key" style="--x:392" seconds="-10" data-key="back"><img src="assets/key-back.webp" alt="" draggable="false"></media-seek-button>
+          <media-seek-button class="key" style="--x:529" seconds="10" data-key="forward"><img src="assets/key-forward.webp" alt="" draggable="false"></media-seek-button>
+          <button type="button" class="key" style="--x:666" data-action="menu" data-key="settings" aria-label="Settings" aria-haspopup="dialog"><img src="assets/key-settings.webp" alt="" draggable="false"></button>
+          <media-fullscreen-button class="key" style="--x:803" data-key="fullscreen"><img src="assets/key-fullscreen.webp" alt="" draggable="false"></media-fullscreen-button>
+        </div>
+
+        <div class="knob" role="slider" tabindex="0" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-orientation="vertical">
+          <span class="knob-pointer" aria-hidden="true"></span>
+        </div>
+        <media-mute-button class="readout"><span data-readout>100%</span></media-mute-button>
+        </div>
+
+        <div class="menu" role="dialog" aria-modal="true" aria-labelledby="menu-title" hidden>
+          <p class="menu-title" id="menu-title">SETTINGS</p>
+          <div class="menu-row">
+            <span class="menu-label" id="lbl-speed">01 PLAYBACK SPEED</span>
+            <div class="menu-opts" role="radiogroup" aria-labelledby="lbl-speed">
+              <button type="button" role="radio" data-rate="0.5">0.5x</button>
+              <button type="button" role="radio" data-rate="0.75">0.75x</button>
+              <button type="button" role="radio" data-rate="1">1x</button>
+              <button type="button" role="radio" data-rate="1.25">1.25x</button>
+              <button type="button" role="radio" data-rate="1.5">1.5x</button>
+              <button type="button" role="radio" data-rate="2">2x</button>
+            </div>
+          </div>
+          <div class="menu-row">
+            <span class="menu-label">02 LOOP TAPE</span>
+            <div class="menu-opts"><button type="button" data-toggle="loop" aria-pressed="false">OFF</button></div>
+          </div>
+          <div class="menu-row">
+            <span class="menu-label">03 KEY CLICKS</span>
+            <div class="menu-opts"><button type="button" data-toggle="sfx" aria-pressed="true">ON</button></div>
+          </div>
+          <div class="menu-row">
+            <span class="menu-label">04 CRT EFFECT</span>
+            <div class="menu-opts"><button type="button" data-toggle="crt" aria-pressed="true" aria-keyshortcuts="R">ON</button></div>
+          </div>
+          <button type="button" class="menu-close" data-action="menu-close">CLOSE <kbd>ESC</kbd></button>
+        </div>
+
+
+        <div class="pad" role="group" aria-label="Touch controls">
+          <div class="pad-seek">
+            <media-time class="time" type="current"></media-time>
+            <media-time-slider class="slider seek">
+              <media-slider-track class="track">
+                <media-slider-buffer class="buffer"></media-slider-buffer>
+                <media-slider-fill class="fill"></media-slider-fill>
+              </media-slider-track>
+              <media-slider-thumb class="thumb"></media-slider-thumb>
+            </media-time-slider>
+            <media-time class="time" type="remaining"></media-time>
+          </div>
+          <div class="pad-keys">
+            <media-play-button class="tbtn"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" fill="currentColor"/></svg></media-play-button>
+            <media-seek-button class="tbtn" seconds="-10"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.500v13l-9-6.500zM21 5.500v13l-9-6.500z" fill="currentColor"/></svg></media-seek-button>
+            <media-seek-button class="tbtn" seconds="10"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.500v13l9-6.500zM12 5.500v13l9-6.500z" fill="currentColor"/></svg></media-seek-button>
+            <media-mute-button class="tbtn"><svg class="i-vol" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="i-mute" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></media-mute-button>
+            <button type="button" class="tbtn" data-action="menu" aria-label="Settings" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M10.3 2.5h3.4l.5 2.6 1.6.7 2.2-1.5 2.4 2.4-1.5 2.2.7 1.6 2.6.5v3.4l-2.6.5-.7 1.6 1.5 2.2-2.4 2.4-2.2-1.5-1.6.7-.5 2.6h-3.4l-.5-2.6-1.6-.7-2.2 1.5-2.4-2.4 1.5-2.2-.7-1.6-2.6-.5v-3.4l2.6-.5.7-1.6-1.5-2.2 2.4-2.4 2.2 1.5 1.6-.7zM12 8.6a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8z"/></svg></button>
+            <media-fullscreen-button class="tbtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.500 9V3.500H9M15 3.500h5.500V9M20.500 15v5.500H15M9 20.500H3.500V15" fill="none" stroke="currentColor" stroke-width="2"/></svg></media-fullscreen-button>
+          </div>
+        </div>
+
+        <media-hotkey keys="Space" action="togglePaused" target="document"></media-hotkey>
+        <media-hotkey keys="k" action="togglePaused" target="document"></media-hotkey>
+        <media-hotkey keys="ArrowLeft" action="seekStep" value="-10" target="document"></media-hotkey>
+        <media-hotkey keys="ArrowRight" action="seekStep" value="10" target="document"></media-hotkey>
+        <media-hotkey keys="m" action="toggleMuted" target="document"></media-hotkey>
+        <media-hotkey keys="f" action="toggleFullscreen" target="document"></media-hotkey>
+        <media-hotkey keys="0-9" action="seekToPercent" target="document"></media-hotkey>
+        <media-hotkey keys="ArrowUp" action="volumeStep" value="0.05"></media-hotkey>
+        <media-hotkey keys="ArrowDown" action="volumeStep" value="-0.05"></media-hotkey>
+
+        <media-status-announcer></media-status-announcer>
+        <side-a-deck></side-a-deck>
+      </media-container>
+    </video-player>
+  </section>
+
+  <section class="hotkeys" id="keys" aria-labelledby="keys-title">
+    <h2 id="keys-title">KEYBOARD</h2>
+    <ul>
+      <li><span class="caps"><kbd>SPACE</kbd><kbd>K</kbd></span><span>Play / pause</span></li>
+      <li><span class="caps"><kbd>&larr;</kbd><kbd>&rarr;</kbd></span><span>Back / forward 10s</span></li>
+      <li><span class="caps"><kbd>&uarr;</kbd><kbd>&darr;</kbd></span><span>Volume, when the deck is focused</span></li>
+      <li><span class="caps"><kbd>M</kbd></span><span>Mute</span></li>
+      <li><span class="caps"><kbd>F</kbd></span><span>Fullscreen</span></li>
+      <li><span class="caps"><kbd>S</kbd></span><span>Settings</span></li>
+      <li><span class="caps"><kbd>R</kbd></span><span>Retro screen effect on / off</span></li>
+      <li><span class="caps"><kbd>0</kbd>&ndash;<kbd>9</kbd></span><span>Jump to 0&ndash;90%</span></li>
+      <li><span class="caps"><kbd>ESC</kbd></span><span>Close menu / exit fullscreen</span></li>
+    </ul>
+    <p class="hint">Or use the deck: click a key, drag or scroll the volume knob, tap the screen to play.</p>
+  </section>
+
+  <div class="light">
+  <section class="access" id="access" aria-labelledby="access-title">
+    <div class="stripes" aria-hidden="true"><i></i><i></i></div>
+    <p class="label">01 / ACCESS</p>
+    <h2 id="access-title">BUILT FOR EVERY VIEWER</h2>
+    <div class="cards">
+      <article><b>TAB</b><h3>KEYBOARD FIRST</h3><p>Every control is reachable with Tab and works with Space, Enter and the arrow keys. Esc closes the menu. Focus is always outlined.</p></article>
+      <article><b>AA</b><h3>READABLE ON ANY FOOTAGE</h3><p>Times and controls sit on a solid dark bar, so type and icons keep their contrast over bright or dark video.</p></article>
+      <article><b>48</b><h3>ROOM FOR A THUMB</h3><p>On a phone the deck gains a row of 48 pixel touch keys and a full-width seek bar. Fullscreen uses the same size.</p></article>
+      <article><b>EASY</b><h3>CALM ON REQUEST</h3><p>Key travel, knob easing and screen flicker switch off when reduced motion is turned on.</p></article>
+    </div>
+  </section>
+
+  <section class="notes" id="notes" aria-labelledby="notes-title">
+    <div>
+      <p class="label">02 / NOTES</p>
+      <h2 id="notes-title">WHY A TAPE DECK</h2>
+      <p>SIDE A started with one question: what if a web player felt like the machine you grew up rewinding? The palette comes from aged brass, olive enamel and green phosphor, with Video.js orange for everything that needs your eye. The controls borrow the logic of transport keys: one job per button, a clear pressed state, labels you can read from across the room.</p>
+      <p class="muted">Under the casing it is a plain Video.js v10 skin built from the standard components. Go fullscreen and the deck steps aside for a slim brass-edged tray.</p>
+    </div>
+    <div class="specimens">
+      <ul class="swatches" aria-label="Palette">
+        <li style="--c:#ff6200"><i></i>ORANGE</li>
+        <li style="--c:#f1eee6"><i></i>PAPER</li>
+        <li style="--c:#f3f0dd"><i></i>IVORY</li>
+        <li style="--c:#ced99b"><i></i>SAGE</li>
+        <li style="--c:#657065"><i></i>TRACK</li>
+        <li style="--c:#25302c"><i></i>RAISED</li>
+        <li style="--c:#161d1b"><i></i>SURFACE</li>
+        <li style="--c:#18120e"><i></i>CASE</li>
+      </ul>
+      <p class="type-ps">PRESS START 2P / HEADLINES</p>
+      <p class="type-vt">VT323 / SCREEN TYPE 0123456789</p>
+      <p class="type-sm">Space Mono / everything you read</p>
+    </div>
+  </section>
+  </div>
+</main>
+
+<footer>
+  <span class="logo big">SIDE A</span>
+  <p><a href="https://videojs.org/">Built on Video.js v10.</a><br>A Contra x Video.js skin challenge entry.<br>Apache License 2.0 / 2026</p>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
